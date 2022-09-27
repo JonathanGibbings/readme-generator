@@ -60,9 +60,9 @@ const questions = [
         type: 'list',
         name: 'license',
         message: 'Which license would you like to use?',
-        choices: ['GNU AGPLv3', 'GNU GPLv3', 'GNU LGPLv3', 
-            'Mozilla Public 2.0', 'Apache 2.0', 'MIT', 
-            'Boost Software 1.0', 'The Unlicense', 'None'],
+        choices: ['GNUAGPLv3', 'GNUGPLv3', 'GNULGPLv3', 
+            'MozillaPublic 2.0', 'Apache2.0', 'MIT', 
+            'BoostSoftware 1.0', 'TheUnlicense', 'None'],
         loop: false
     },
     {
@@ -114,19 +114,18 @@ const questions = [
                 return false;
             }
         }
-    },
-    {
-        type: 'input',
-        name: 'fileName',
-        message: 'What do you want to name this file? Default: ',
-        default: 'README'
     }
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-    console.log(data);
-
+function writeToFile(data) {
+    fs.writeFile('./dist/README.md', data, err => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('File created.');
+        }
+    });
 }
 
 // TODO: Create a function to initialize app
@@ -136,7 +135,5 @@ function init() {
 
 // Function call to initialize app
 init()
-    .then(data => {
-        console.log(data);
-        // return generateMarkdown(data);
-    });
+    .then(answers => generateMarkdown(answers))
+    .then(data => writeToFile(data));

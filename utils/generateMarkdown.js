@@ -5,7 +5,7 @@ function renderLicenseBadge(license) {
     return '';
   } else {
     return `
-      ![License Badge](https://img.shields.io/badge/license-${data.license}-green)
+![License Badge](https://img.shields.io/badge/license-${license}-green)
     `
   }
 }
@@ -13,9 +13,9 @@ function renderLicenseBadge(license) {
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
 function renderLicenseLink(license) {
-  const licenseArr = ['GNU AGPLv3', 'GNU GPLv3', 'GNU LGPLv3', 
-  'Mozilla Public 2.0', 'Apache 2.0', 'MIT', 
-  'Boost Software 1.0', 'The Unlicense']
+  const licenseArr = ['GNUAGPLv3', 'GNUGPLv3', 'GNULGPLv3', 
+  'MozillaPublic 2.0', 'Apache2.0', 'MIT', 
+  'BoostSoftware 1.0', 'TheUnlicense', 'None']
   let index = licenseArr.indexOf(license);
   switch (index) {
     case 0: return 'agpl-3.0';
@@ -44,30 +44,28 @@ function renderLicenseSection(license) {
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
   return `
-    ${renderLicenseBadge(data.license)}
-    # ${data.projectName}
-    ## Description
-    ${data.description}
-    ## Table of Contents (Optional)
-    * [Installation](#installation)
-    * [Usage](#usage)
-    * [Credits](#credits)
-    * [License](#license)
-    * [Contributing](#contributing)
-    * [Tests](#tests)
+${renderLicenseBadge(data.license)}
+# ${data.projectName}
+## Description
+${data.description}
+## Table of Contents (Optional)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Credits](#credits)
+* [License](#license)
+* [Contributing](#contributing)
+* [Tests](#tests)
+## Installation
+${data.installation}
+## Usage
+${data.usage}
+${renderLicenseSection(data.license)}
+## Contributing
+${data.contributing}
+## Tests
+${data.tests}
+## Questions
 
-    ## Installation
-    ${data.installation}
-    ## Usage
-    ${data.usage}
-
-    ${renderLicenseSection(data.license)}
-    ## Contributing
-    ${data.contributing}
-    ## Tests
-    ${data.tests}
-    ## Questions
-    
 `;
 }
 
