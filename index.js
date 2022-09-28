@@ -9,9 +9,9 @@ const questions = [
     {
         type: 'input',
         name: 'projectName',
-        message: 'What is your project name? (Required)',
-        validate: nameInput => {
-            if (nameInput) {
+        message: 'What is your project name?',
+        validate: answer => {
+            if (answer) {
                 return true;
             } else {
                 console.log('Please enter a project name.');
@@ -22,9 +22,9 @@ const questions = [
     {
         type: 'input',
         name: 'description',
-        message: 'What is your project description? (Required)',
-        validate: descriptionInput => {
-            if (descriptionInput) {
+        message: 'What is your project description?',
+        validate: answer => {
+            if (answer) {
                 return true;
             } else {
                 console.log('Please enter a project description.');
@@ -33,28 +33,30 @@ const questions = [
         }
     },
     {
-        type: 'confirm',
-        name: 'confirmInstallation',
-        message: 'Would you like to add installation instructions?',
-        default: true
-    },
-    {
         type: 'input',
-        name: 'Installation',
+        name: 'installation',
         message: 'What are your installation instructions?',
-        when: ({confirmInstallation}) => confirmInstallation
-    },
-    {
-        type: 'confirm',
-        name: 'confirmUsage',
-        message: 'Would you like to add usage instructions?',
-        default: true
+        validate: answer => {
+            if (answer) {
+                return true;
+            } else {
+                console.log('Please enter installation instructions.');
+                return false;
+            }
+        }
     },
     {
         type: 'input',
         name: 'usage',
         message: 'What are your usage instructions?',
-        when: ({confirmUsage}) => confirmUsage
+        validate: answer => {
+            if (answer) {
+                return true;
+            } else {
+                console.log('Please enter installation instructions.');
+                return false;
+            }
+        }
     },
     {
         type: 'list',
@@ -66,35 +68,37 @@ const questions = [
         loop: false
     },
     {
-        type: 'confirm',
-        name: 'confirmContributing',
-        message: 'Would you like to add contributing instructions?',
-        default: true
-    },
-    {
         type: 'input',
-        name: 'Contributing',
+        name: 'contributing',
         message: 'What are your contributing instructions?',
-        when: ({confirmContributing}) => confirmContributing
-    },
-    {
-        type: 'confirm',
-        name: 'confirmTests',
-        message: 'Would you like to add test instructions?',
-        default: true
+        validate: answer => {
+            if (answer) {
+                return true;
+            } else {
+                console.log('Please enter installation instructions.');
+                return false;
+            }
+        }
     },
     {
         type: 'input',
         name: 'tests',
         message: 'What are your test instructions?',
-        when: ({confirmTests}) => confirmTests
+        validate: answer => {
+            if (answer) {
+                return true;
+            } else {
+                console.log('Please enter installation instructions.');
+                return false;
+            }
+        }
     },
     {
         type: 'input',
         name: 'githubUser',
-        message: 'What is your Github user name? (Required)',
-        validate: nameInput => {
-            if (nameInput) {
+        message: 'What is your Github user name?',
+        validate: answer => {
+            if (answer) {
                 return true;
             } else {
                 console.log('Please enter a valid username.');
@@ -105,9 +109,9 @@ const questions = [
     {
         type: 'input',
         name: 'email',
-        message: 'What is your email address? (Required)',
-        validate: emailInput => {
-            if (emailInput) {
+        message: 'What is your email address?',
+        validate: answer => {
+            if (answer) {
                 return true;
             } else {
                 console.log('Please enter a valid email.');
@@ -128,12 +132,27 @@ function writeToFile(data) {
     });
 }
 
+const dummy = {
+    projectName: 'README-Generator',
+    description: "An application that runs on the command line and generates a README.md based off of the user's answers.",
+    installation: 'Run npm install inquirer@8.2.4 from the command line in the folder you have the index.js file in.',
+    usage: 'Run the application from the command line in the folder index.js is in. Run it with the command node index.js.',
+    license: 'MIT',
+    contributing: 'There are currently no plans to allow contributions to this project at this time.',
+    tests: 'There is currently no testing functionality included in this application.',
+    githubUser: 'JonathanGibbings',
+    email: 'username@gmail.com'
+  }
+
 // TODO: Create a function to initialize app
 function init() {
-    return inquirer.prompt(questions)
+    return inquirer.prompt(questions);
 }
 
 // Function call to initialize app
-init()
-    .then(answers => generateMarkdown(answers))
-    .then(data => writeToFile(data));
+// init()
+//     .then(data => console.log(data))
+//     .then(answers => generateMarkdown(answers))
+//     .then(data => writeToFile(data));
+
+writeToFile(generateMarkdown(dummy));

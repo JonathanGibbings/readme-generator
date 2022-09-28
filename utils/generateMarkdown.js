@@ -13,8 +13,8 @@ function renderLicenseBadge(license) {
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
 function renderLicenseLink(license) {
-  const licenseArr = ['GNUAGPLv3', 'GNUGPLv3', 'GNULGPLv3', 
-  'MozillaPublic 2.0', 'Apache2.0', 'MIT', 
+  const licenseArr = ['GNUAGPLv3', 'GNUGPLv3', 'GNULGPLv3',
+  'MozillaPublic 2.0', 'Apache2.0', 'MIT',
   'BoostSoftware 1.0', 'TheUnlicense', 'None']
   let index = licenseArr.indexOf(license);
   switch (index) {
@@ -32,13 +32,14 @@ function renderLicenseLink(license) {
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
 function renderLicenseSection(license) {
-  if (license = 'None') {
+  if (license === 'None') {
     return '';
-  }
+  } else {
   return `
-  ## License
-  Licensed under the [${license}](https://choosealicense.com/licenses/${renderLicenseLink(license)}/) license.
+## License
+Licensed under the [${license}](https://choosealicense.com/licenses/${renderLicenseLink(license)}/) license.
   `;
+  }
 }
 
 // TODO: Create a function to generate markdown for README
@@ -48,13 +49,14 @@ ${renderLicenseBadge(data.license)}
 # ${data.projectName}
 ## Description
 ${data.description}
-## Table of Contents (Optional)
+## Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
 * [Credits](#credits)
 * [License](#license)
 * [Contributing](#contributing)
 * [Tests](#tests)
+* [Questions](#questions)
 ## Installation
 ${data.installation}
 ## Usage
@@ -65,7 +67,8 @@ ${data.contributing}
 ## Tests
 ${data.tests}
 ## Questions
-
+If you have any questions, please contact us at [GitHub/${data.githubUser}](https://github.com/${data.githubUser}/),
+or email us at ${data.email}.
 `;
 }
 
