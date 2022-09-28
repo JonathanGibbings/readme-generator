@@ -13,9 +13,13 @@ An application that runs on the command line and generates a README.md based off
 
 Run the application from the command line in the folder index.js is in. Run it with the command node index.js.
 
+## Screenshot
+
+![Screenshot](./assets/imgs/readme-generator-screenshot.png)
+
 ## Tutorial Video
 
-![Tutorial](./assets/imgs/readme-generator-screenshot.png)
+[Tutorial Video](./assets/imgs/README-generator-tutorial.mp4)
 
 ## Built With
 
