@@ -1,7 +1,6 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
+// Returns a badge for the license if there is no license, return an empty string
 function renderLicenseBadge(license) {
-  if (!license) {
+  if (license === 'None') {
     return '';
   } else {
     return `
@@ -10,12 +9,11 @@ function renderLicenseBadge(license) {
   }
 }
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
+// Returns  the link to the license information if there is no license, return an empty string
 function renderLicenseLink(license) {
   const licenseArr = ['GNUAGPLv3', 'GNUGPLv3', 'GNULGPLv3',
-  'MozillaPublic 2.0', 'Apache2.0', 'MIT',
-  'BoostSoftware 1.0', 'TheUnlicense', 'None']
+  'MozillaPublic2.0', 'Apache2.0', 'MIT',
+  'BoostSoftware1.0', 'TheUnlicense', 'None']
   let index = licenseArr.indexOf(license);
   switch (index) {
     case 0: return 'agpl-3.0';
@@ -29,8 +27,7 @@ function renderLicenseLink(license) {
   }
 }
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
+// Returns a license section if there is no license, return an empty string
 function renderLicenseSection(license) {
   if (license === 'None') {
     return '';
@@ -42,8 +39,9 @@ Licensed under the [${license}](https://choosealicense.com/licenses/${renderLice
   }
 }
 
-// TODO: Create a function to generate markdown for README
+// Returns the formatted markdown
 function generateMarkdown(data) {
+  console.log(data);
   return `
 ${renderLicenseBadge(data.license)}
 # ${data.projectName}

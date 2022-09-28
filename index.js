@@ -1,10 +1,9 @@
-// TODO: Include packages needed for this application
+// initialize the packages and dependencies.
 const fs = require('fs');
 const inquirer = require('inquirer');
-const generateMarkdown = require('./utils/generateMarkdown.js');
+const generateMarkdown = require('./assets/util/generateMarkdown.js');
 
-
-// TODO: Create an array of questions for user input
+// array of questions
 const questions = [
     {
         type: 'input',
@@ -63,8 +62,8 @@ const questions = [
         name: 'license',
         message: 'Which license would you like to use?',
         choices: ['GNUAGPLv3', 'GNUGPLv3', 'GNULGPLv3', 
-            'MozillaPublic 2.0', 'Apache2.0', 'MIT', 
-            'BoostSoftware 1.0', 'TheUnlicense', 'None'],
+            'MozillaPublic2.0', 'Apache2.0', 'MIT', 
+            'BoostSoftware1.0', 'TheUnlicense', 'None'],
         loop: false
     },
     {
@@ -121,7 +120,7 @@ const questions = [
     }
 ];
 
-// TODO: Create a function to write README file
+// takes the generated markdown and writes it to a file in dist folder
 function writeToFile(data) {
     fs.writeFile('./dist/README.md', data, err => {
         if (err) {
@@ -144,15 +143,15 @@ const dummy = {
     email: 'username@gmail.com'
   }
 
-// TODO: Create a function to initialize app
+// initial function that sets up for promise chain
 function init() {
     return inquirer.prompt(questions);
 }
 
 // Function call to initialize app
-// init()
-//     .then(data => console.log(data))
-//     .then(answers => generateMarkdown(answers))
-//     .then(data => writeToFile(data));
+init()
+    // .then(data => console.log(data))
+    .then(data => generateMarkdown(data))
+    .then(data => writeToFile(data));
 
-writeToFile(generateMarkdown(dummy));
+// writeToFile(generateMarkdown(dummy));
